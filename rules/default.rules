@@ -1,0 +1,19 @@
+# SpecterIDS default defensive detection rules.
+# Format:
+# RULE_NAME key=value key=value ...
+
+PORT_SCAN threshold=20 window=10 severity=HIGH enabled=true
+SSH_BRUTE_FORCE port=22 threshold=10 window=60 severity=HIGH enabled=true
+SYN_FLOOD threshold=100 window=5 severity=CRITICAL enabled=true
+ICMP_FLOOD threshold=100 window=5 severity=MEDIUM enabled=true
+UDP_FLOOD threshold=200 window=10 severity=MEDIUM enabled=true
+BEACONING min_hits=8 interval=30 tolerance=3 severity=MEDIUM enabled=true
+ARP_SPOOFING severity=HIGH enabled=true
+DNS_FLOOD threshold=150 window=10 severity=MEDIUM enabled=true
+RATE_ANOMALY threshold=500 window=10 severity=MEDIUM enabled=true
+SLOW_SCAN threshold=15 window=300 severity=MEDIUM enabled=true
+SENSITIVE_PORT threshold=1 window=60 severity=MEDIUM enabled=true
+CONNECTION_EXCESS threshold=200 window=60 severity=HIGH enabled=true
+LARGE_PAYLOAD threshold=1400 window=60 severity=MEDIUM enabled=true
+VOLUME_ANOMALY threshold=10000000 window=60 severity=HIGH enabled=true
+HEURISTIC_RISK threshold=80 window=300 severity=HIGH enabled=true
