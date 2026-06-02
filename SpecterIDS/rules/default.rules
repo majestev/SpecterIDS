@@ -1,0 +1,35 @@
+# SpecterIDS default defensive detection rules.
+# Format:
+# [group default]
+# RULE_NAME key=value key=value ...
+# Optional destination-specific groups:
+# [group name]
+# targets=192.0.2.10,2001:db8::10
+# RULE_NAME key=value key=value ...
+
+[group default]
+PORT_SCAN threshold=20 window=10 severity=HIGH enabled=true
+SSH_BRUTE_FORCE port=22 threshold=10 window=60 severity=HIGH enabled=true
+SYN_FLOOD threshold=100 window=5 severity=CRITICAL enabled=true
+ICMP_FLOOD threshold=100 window=5 severity=MEDIUM enabled=true
+UDP_FLOOD threshold=200 window=10 severity=MEDIUM enabled=true
+BEACONING min_hits=8 interval=30 tolerance=3 ignore_private=true severity=LOW enabled=true
+ARP_SPOOFING severity=HIGH enabled=true
+DNS_FLOOD threshold=150 window=10 severity=MEDIUM enabled=true
+HTTP_FLOOD ports=80,443 threshold=300 window=10 severity=HIGH enabled=true
+RATE_ANOMALY threshold=500 window=10 severity=MEDIUM enabled=true
+SLOW_SCAN threshold=15 window=300 severity=MEDIUM enabled=true
+SENSITIVE_PORTS ports=22,23,445,3389 threshold=1 window=60 severity=MEDIUM enabled=true
+CONNECTION_EXCESS threshold=200 window=60 severity=HIGH enabled=true
+LARGE_PAYLOAD threshold=1400 window=60 severity=MEDIUM enabled=true
+VOLUME_ANOMALY threshold=10000000 window=60 severity=HIGH enabled=true
+HEURISTIC_RISK threshold=80 window=300 severity=HIGH enabled=true
+
+[group web_servers]
+targets=192.168.1.10,192.168.1.11,2001:db8::10
+HTTP_FLOOD ports=80,443 threshold=300 window=10 severity=HIGH enabled=true
+PORT_SCAN threshold=50 window=20 severity=MEDIUM enabled=true
+
+[group lab_sensitive]
+targets=10.0.0.5,10.0.0.6
+SENSITIVE_PORTS ports=22,3389,5432 threshold=5 window=60 severity=CRITICAL enabled=true
